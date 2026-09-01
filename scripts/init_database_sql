@@ -13,3 +13,34 @@ WARNING:
        before running this script.
 */
 
+use master;
+GO
+
+-- Drop and Recreate  the 'DataWarehouse' database
+If EXISTS (Select 1 from sys.databases where name = 'DataWarehouse')
+Begin
+alter database DataWarehouse set single_user with rollback immediate;
+drop database DataWarehouse;
+End;
+
+Go
+
+--create the 'DataWarehouse' database
+
+Create database DataWarehouse;
+Go
+
+use DataWarehouse;
+Go
+
+--Create Schemas
+create schema bronze;
+Go
+
+create schema silver;
+Go
+
+create schema gold;
+Go
+
+
